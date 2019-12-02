@@ -41,8 +41,7 @@ int main(int argc, char **argv)
   chunk = curl_slist_append(
     chunk,
     "Authorization: Bearer "
-    "ya29.Il-zB4gJOKmmr3KyStsQw8nd9D994EXCwd5aWnofHdwOpB5EgXjRUx1wFdXBDgiemoLEVogO19ng4ysTe8No6Poq-"
-    "2akjEoEu3rbq0hCDYhRtJWFHZO0mtvA9lclHJKBkg");
+    "ya29.Il-zB9EkPJS6Wy75U5DJmB33yuZbMEyqJMoWzJ0sv-ZK9aeU5lVfxyAcYhhqu26NTT1KNQ9h6kcx_s6vogcyk1e4nW3k0hoSvvWhzcgmD37exPNQGhX3wUdb8rHartqeww");
   chunk = curl_slist_append(chunk, "Content-Type: application/json; charset=utf-8");
   curl_easy_setopt(handle, CURLOPT_HTTPHEADER, chunk);
   long noSignal = 1;
@@ -62,6 +61,8 @@ int main(int argc, char **argv)
     }
   })";
   curl_easy_setopt(handle, CURLOPT_POSTFIELDS, json.c_str());
+  curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0);
+  curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0);
   CURLcode code = curl_easy_perform(handle);
   strm.flush();
   if (code != CURLE_OK)
@@ -134,4 +135,5 @@ int main(int argc, char **argv)
   }
 
   curl_global_cleanup();
+  return 0;
 }

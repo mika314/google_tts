@@ -3,7 +3,6 @@
 #include <array>
 #include <iostream>
 #include <vector>
-
 #ifndef INT64_C
 #define INT64_C(c) (c##LL)
 #define UINT64_C(c) (c##ULL)
@@ -48,6 +47,7 @@ namespace
 std::vector<std::int16_t> decodeAudio(const std::string &compressedAudio)
 {
   std::vector<std::int16_t> audio;
+#if 1
   av_register_all();
   AVFormatContext *formatContext = avformat_alloc_context();
   unsigned char *buff = (unsigned char *)av_malloc(4096);
@@ -76,7 +76,7 @@ std::vector<std::int16_t> decodeAudio(const std::string &compressedAudio)
   int audioStreamIndex = -1;
 
   for (unsigned i = 0; i < formatContext->nb_streams; ++i)
-    if (formatContext->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO)
+    if (formatContext->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO)
     {
       if (audioStreamIndex == -1)
         audioStreamIndex = i;
@@ -196,5 +196,6 @@ std::vector<std::int16_t> decodeAudio(const std::string &compressedAudio)
   }
 
   av_free(ctx);
+#endif
   return audio;
 }

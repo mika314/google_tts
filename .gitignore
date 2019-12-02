@@ -1,3 +1,9 @@
 *~
-/tts
+/tts.exe
 /.coddle/
+/tts/.vs/
+/tts/tts/Debug/
+/tts/tts/x64/
+/tts/x64/Debug/tts.exe
+/tts/x64/Debug/tts.ilk
+/tts/x64/Debug/tts.pdb
